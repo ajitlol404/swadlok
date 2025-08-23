@@ -1,7 +1,7 @@
-# Compiled class file
+# Compiled class files
 *.class
 
-# Log file
+# Log files
 *.log
 
 # BlueJ files
@@ -19,6 +19,41 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Virtual machine crash logs
 hs_err_pid*
 replay_pid*
+
+# Maven build
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+!.mvn/wrapper/MavenWrapperDownloader.java
+
+# Gradle build (if using Gradle instead of Maven)
+build/
+.gradle/
+
+# IDEs
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+# VS Code
+.vscode/
+
+# Spring Boot specific configs (ignore environment-specific configs)
+application-*.yml
+application-*.yaml
+application-*.properties
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Env files
+*.env
