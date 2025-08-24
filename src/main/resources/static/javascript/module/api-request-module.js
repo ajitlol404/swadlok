@@ -2,7 +2,7 @@ import { deleteRequest, getRequest, patchRequest, postRequest, putRequest, uploa
 
 const BASE_URLS = {
     FILE: "/api/v1/files",
-    SETUP: "/setup",
+    SETUP: "/api/v1/setup",
 };
 
 const FileAPI = {

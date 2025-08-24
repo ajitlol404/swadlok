@@ -44,13 +44,6 @@ function handleAdminPhoneInput() {
 async function handleAdminSetupFormSubmit(e) {
     e.preventDefault();
 
-    const body = {
-        name: adminNameInput.value.trim(),
-        email: adminEmailInput.value.trim(),
-        password: adminPasswordInput.value.trim(),
-        phone: adminPhoneInput.value.trim(),
-    };
-
     try {
         setFormFieldsDisabled(adminSetupForm);
 
@@ -61,6 +54,14 @@ async function handleAdminSetupFormSubmit(e) {
             const uploadResult = await SetupAPI.uploadImage("USER", file);
             uploadedImageId = uploadResult.fileId;
         }
+
+        const body = {
+            name: adminNameInput.value.trim(),
+            email: adminEmailInput.value.trim(),
+            password: adminPasswordInput.value.trim(),
+            phoneNumber: adminPhoneInput.value.trim(),
+            image: uploadedImageId
+        };
 
         await SetupAPI.createAdmin(body);
         Toast.success(Message.USER.ADMIN_CREATED);
