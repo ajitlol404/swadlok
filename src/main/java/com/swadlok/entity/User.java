@@ -10,6 +10,7 @@ import static jakarta.persistence.EnumType.STRING;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Builder
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
@@ -44,7 +45,7 @@ public class User extends BaseEntity {
             String prefix = switch (this.role) {
                 case ROLE_ADMIN -> "ADM";
                 case ROLE_CUSTOMER -> "CUS";
-                case ROLE_MANGER -> "MAN";
+                case ROLE_MANAGER -> "MAN";
                 case ROLE_DELIVERY -> "DEL";
             };
             this.code = generateReadableId(prefix);
@@ -52,9 +53,10 @@ public class User extends BaseEntity {
     }
 
     public enum Role {
+
         ROLE_ADMIN,
         ROLE_CUSTOMER,
-        ROLE_MANGER,
+        ROLE_MANAGER,
         ROLE_DELIVERY
 
     }

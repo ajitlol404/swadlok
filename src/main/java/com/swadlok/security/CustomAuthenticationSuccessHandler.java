@@ -22,7 +22,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String redirectURL = switch (getUserRole(authentication)) {
             case ROLE_ADMIN -> "/admin";
             case ROLE_CUSTOMER -> "/customer";
-            case ROLE_MANGER -> "/manager";
+            case ROLE_MANAGER -> "/manager";
             case ROLE_DELIVERY -> "/delivery";
             default -> "/";
         };
@@ -35,7 +35,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         return authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .map(User.Role::valueOf) // Assumes role names match enum names exactly
-                .filter(role -> role == ROLE_ADMIN || role == ROLE_CUSTOMER || role == ROLE_MANGER || role == ROLE_DELIVERY)
+                .filter(role -> role == ROLE_ADMIN || role == ROLE_CUSTOMER || role == ROLE_MANAGER || role == ROLE_DELIVERY)
                 .findFirst()
                 .orElse(null);
     }

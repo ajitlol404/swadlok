@@ -1,5 +1,7 @@
 package com.swadlok.utility;
 
+import java.util.List;
+
 public class AppConstant {
 
     // Private constructor to prevent instantiation
@@ -16,6 +18,17 @@ public class AppConstant {
     public static final int MIN_STRING_DEFAULT_SIZE = 3;
 
     public static final long MAX_IMAGE_SIZE = 2L * 1024 * 1024; // 2 MB
+
+    public static final List<String> ALLOWED_IMAGE_EXTENSIONS = List.of("jpg", "jpeg", "png");
+    public static final int VERIFICATION_EXPIRATION_MINUTES = 15;
+
+    public static final int MAX_SMTP_CONFIGURATIONS = 5;
+    public static final int SMTP_TIMEOUT_MS = 10000;
+    public static final String MAIL_SMTP_AUTH = "mail.smtp.auth";
+    public static final String MAIL_SMTP_STARTTLS = "mail.smtp.starttls.enable";
+    public static final String MAIL_SMTP_CONNECTIONTIMEOUT = "mail.smtp.connectiontimeout";
+    public static final String MAIL_SMTP_TIMEOUT = "mail.smtp.timeout";
+    public static final String MAIL_SMTP_WRITETIMEOUT = "mail.smtp.writetimeout";
 
     public static final String LOWERCASE_CHARACTERS = "abcdefghijklmnopqrstuvwxyz";
     public static final String UPPERCASE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

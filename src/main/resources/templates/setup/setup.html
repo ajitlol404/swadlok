@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{base :: base_head}"></th:block>
+    <script type="module" th:src="@{/javascript/setup.js}" defer></script>
+</head>
+
+<body class="d-flex justify-content-center align-items-center bg-light vh-100">
+<div class="container">
+    <div class="row justify-content-center align-items-center gap-5">
+        <!-- Left: Logo -->
+        <div class="col-md-5 d-flex justify-content-center mb-4 mb-md-0">
+            <img th:src="@{/images/logo/swadlok.png}" alt="Logo" class="img-fluid" />
+        </div>
+
+        <!-- Right: Card with Tabs -->
+        <div class="col-md-6 d-flex justify-content-center">
+            <div class="card shadow rounded-3 border border-0 w-100">
+                <div class="card-body">
+                    <div class="text-center my-3">
+                        <h4 class="fw-bold">Admin Setup</h4>
+                        <p class="text-muted mb-0">Create your first admin account</p>
+                    </div>
+                    <form id="admin_setup_form" method="post" autocomplete="off">
+                        <div class="my-3">
+                            <label for="admin_name_input" class="form-label">Name&nbsp;<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="admin_name_input" placeholder="Enter your name" maxlength="50" required />
+                        </div>
+                        <div class="my-3">
+                            <label for="admin_email_input" class="form-label">Email&nbsp;<span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="admin_email_input" placeholder="Enter your email" maxlength="320" required />
+                        </div>
+                        <div class="my-3">
+                            <label for="admin_password_input" class="form-label">Password&nbsp;<span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="admin_password_input" placeholder="Enter your password" maxlength="100" required />
+                                <span class="input-group-text cursor-pointer" id="togglePassword"><i class="fa-solid fa-eye-slash"></i></span>
+                            </div>
+                        </div>
+                        <div class="my-3">
+                            <label for="admin_phone_input" class="form-label">Phone Number&nbsp;<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="admin_phone_input" placeholder="Enter your phone number" minlength="10" maxlength="10" pattern="^[6-9][0-9]{9}$" required />
+                        </div>
+                        <div class="my-3">
+                            <label for="admin_image_input" class="form-label">Profile Image</label>
+                            <input type="file" class="form-control" id="admin_image_input" accept="image/*" />
+                        </div>
+
+                        <button type="submit" form="admin_setup_form" id="admin_setup_form_submit_btn" class="btn btn-success w-100"><i class="fas fa-paper-plane"></i>&nbsp;Submit</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{fragments/toast-fragment :: toast_alert_message}"></th:block>
+</body>
+</html>

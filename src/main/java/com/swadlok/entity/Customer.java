@@ -6,6 +6,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,6 +24,9 @@ public class Customer extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
+
+    @Column
+    private LocalDate dateOfBirth;
 
     @JdbcTypeCode(JSON)
     private UserData userData;

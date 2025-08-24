@@ -41,10 +41,12 @@ public class SecurityConfiguration {
 
     private static final String[] PUBLIC_REST_APIS = {
             BASE_API_PATH + "/unverified-users/**",
-            BASE_API_PATH + "/enumeration-values/**"
+            BASE_API_PATH + "/enumeration-values/**",
+            BASE_API_PATH + "/setup/**"
     };
 
     private static final String[] PUBLIC_APIS = {
+            "/setup/**",
             "/signin",
             "/unverified-users/**"
     };
