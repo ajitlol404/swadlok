@@ -2,7 +2,10 @@ package com.swadlok.service.impl;
 
 import com.swadlok.dto.UserDto.AdminRequest;
 import com.swadlok.dto.UserDto.AdminResponse;
+import com.swadlok.entity.Customer;
+import com.swadlok.entity.User;
 import com.swadlok.exception.ApplicationException;
+import com.swadlok.repository.CustomerRepository;
 import com.swadlok.repository.UserRepository;
 import com.swadlok.service.FileService;
 import com.swadlok.service.UserService;
@@ -13,7 +16,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 import static com.swadlok.entity.User.Role.ROLE_ADMIN;
+import static com.swadlok.entity.User.Role.ROLE_CUSTOMER;
+import static java.lang.Boolean.TRUE;
 
 @Slf4j
 @Service
@@ -22,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
     private final FileService fileService;
     private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -54,5 +63,36 @@ public class UserServiceImpl implements UserService {
             throw new ApplicationException("User creation failed. Rolled back uploaded image. Reason: " + e.getMessage(), e);
 
         }
+    }
+
+    @Override
+    public boolean userExistsByEmail(String email) {
+        return userRepository.existsByEmailIgnoreCase(email);
+    }
+
+    @Override
+    public void createCustomer(String name, String email, String password, String phoneNumber) {
+
+        User user = User.builder()
+                .name(name)
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .role(ROLE_CUSTOMER)
+                .isActive(TRUE)
+                .phoneNumber(phoneNumber)
+                .build();
+
+        userRepository.save(user);
+
+        Customer customer = Customer.builder()
+                .user(user)
+                .userData(Customer.UserData.builder()
+                        .secretKey(UUID.randomUUID())
+                        .secretKeyStatus(false)
+                        .build())
+                .addresses(new ArrayList<>())
+                .build();
+
+        customerRepository.save(customer);
     }
 }

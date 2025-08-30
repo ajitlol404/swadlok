@@ -13,9 +13,10 @@ import java.util.UUID;
 import static org.hibernate.type.SqlTypes.JSON;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Builder
 @Entity
 @Table(name = "customers")

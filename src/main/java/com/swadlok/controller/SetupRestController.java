@@ -3,6 +3,7 @@ package com.swadlok.controller;
 import com.swadlok.dto.FileUploadResponse;
 import com.swadlok.dto.UserDto.AdminRequest;
 import com.swadlok.dto.UserDto.AdminResponse;
+import com.swadlok.exception.ApplicationException;
 import com.swadlok.service.FileService;
 import com.swadlok.service.UserService;
 import com.swadlok.utility.ImageCategory;
@@ -22,6 +23,15 @@ public class SetupRestController {
 
     private final UserService userService;
     private final FileService fileService;
+
+    @ModelAttribute
+    public void beforeEveryRequest() {
+        System.out.println("👉 Running before every SetupRestController API call");
+
+        if (userService.areThereAdminUsers()) {
+            throw new ApplicationException("Admin account already exists. Please sign in to continue");
+        }
+    }
 
     @PostMapping("/users")
     public ResponseEntity<AdminResponse> createUser(@Valid @RequestBody AdminRequest adminRequest) {

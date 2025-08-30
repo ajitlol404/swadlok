@@ -9,4 +9,8 @@ public interface UserService {
 
     AdminResponse createAdminUser(AdminRequest adminRequest);
 
+    boolean userExistsByEmail(String email);
+
+    void createCustomer(String name, String email, String password, String phoneNumber);
+
 }

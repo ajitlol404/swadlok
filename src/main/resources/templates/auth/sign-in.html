@@ -10,40 +10,83 @@
     <div class="row justify-content-center align-items-center gap-5">
         <!-- Left: Logo -->
         <div class="col-md-5 d-flex justify-content-center mb-4 mb-md-0">
-            <img th:src="@{/images/logo/paynetic-new.png}" alt="Logo" class="img-fluid" />
+            <img th:src="@{/images/logo/swadlok.png}" alt="Logo" class="img-fluid" />
         </div>
 
         <!-- Right: Card with Tabs -->
         <div class="col-md-6 d-flex justify-content-center">
             <div class="card shadow rounded-3 border border-0 w-100">
                 <div class="card-body">
-                    <div class="text-center my-3">
-                        <h4 class="fw-bold">Welcome Back</h4>
-                        <p class="text-muted mb-0">Sign in by entering information below</p>
+                    <ul class="nav nav-pills nav-fill" id="auth_tab">
+                        <li class="nav-item">
+                            <button class="nav-link active" id="pills_sign_in_tab" data-bs-toggle="pill" data-bs-target="#sign_in" type="button" role="tab" aria-controls="sign_in" aria-selected="true">
+                                <i class="fa-solid fa-right-to-bracket"></i>&nbsp;Sign In
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" id="pills_sign_up_tab" data-bs-toggle="pill" data-bs-target="#sign_up" type="button" role="tab" aria-controls="sign_up" aria-selected="false">
+                                <i class="fa-solid fa-user-plus"></i>&nbsp;Sign Up
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="auth_tab_content">
+                        <div class="tab-pane fade show active" id="sign_in" role="tabpanel" aria-labelledby="pills_sign_in_tab" tabindex="0">
+                            <form id="signin_form" th:action="@{/signin-process}" method="post" autocomplete="off">
+                                <div class="my-3">
+                                    <label for="signin_email_input" class="form-label">Email&nbsp;<span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="signin_email_input" name="username" placeholder="Enter your email" maxlength="320" required value="admin@mail.com" />
+                                </div>
+                                <div class="my-3">
+                                    <label for="signin_password_input" class="form-label">Password&nbsp;<span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="signin_password_input" name="password" placeholder="Enter your password" aria-describedby="basic-addon2" maxlength="100" required value="Abc@1234"/>
+                                        <span class="input-group-text cursor-pointer" id="basic-addon2"><i class="fa-solid fa-eye-slash"></i></span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center my-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input cursor-pointer" type="checkbox" id="signin_remember_me" />
+                                        <label class="form-check-label" for="signin_remember_me">Remember me</label>
+                                    </div>
+                                    <div>
+                                        <a href="#" class="text-decoration-none cursor-pointer" data-bs-toggle="modal" data-bs-target="#reset_password_modal">Reset password?</a>
+                                    </div>
+                                </div>
+                                <button type="submit" form="signin_form" class="btn btn-success w-100"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;Sign In</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="sign_up" role="tabpanel" aria-labelledby="pills_sign_up_tab" tabindex="0">
+                            <form id="signup_form" autocomplete="off">
+                                <div class="my-3">
+                                    <label for="signup_name_input" class="form-label">Name&nbsp;<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="signup_name_input" placeholder="Enter your name" minlength="3" maxlength="50" pattern="^[a-zA-Z.\-\s]+$" required />
+                                </div>
+                                <div class="my-3">
+                                    <label for="signup_email_input" class="form-label">Email&nbsp;<span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="signup_email_input" placeholder="Enter your email" minlength="5" maxlength="320" required/>
+                                </div>
+                                <div class="my-3">
+                                    <label for="signup_phone_input" class="form-label">Phone Number&nbsp;<span class="text-danger">*</span></label>
+                                    <input type="tel" class="form-control" id="signup_phone_input" placeholder="Enter your phone number" minlength="10" maxlength="10" pattern="^[6-9][0-9]{9}$" required />
+                                </div>
+                                <div class="my-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input cursor-pointer" type="checkbox" id="terms_conditions_checkbox" required />
+                                        <label class="form-check-label" for="terms_conditions_checkbox">I accept the <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#terms_conditions_modal">Terms and Conditions</a></label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100" id="signup_form_submit_btn"><i class="fa-solid fa-user-plus"></i>&nbsp;Sign Up</button>
+                            </form>
+                        </div>
                     </div>
-                    <form id="signin_form" th:action="@{/signin-process}" method="post" autocomplete="off">
-                        <div class="my-3">
-                            <label for="signin_email" class="form-label">Email&nbsp;<span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="signin_email" name="username" placeholder="Enter your email" maxlength="320" required />
-                        </div>
-                        <div class="my-3">
-                            <label for="signin_password" class="form-label">Password&nbsp;<span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" id="signin_password" name="password" placeholder="Enter your password" aria-describedby="basic-addon2" maxlength="100" required />
-                                <span class="input-group-text cursor-pointer" id="basic-addon2"><i class="fa-solid fa-eye-slash"></i></span>
-                            </div>
-                        </div>
-                        <div class="my-3">
-                            <div class="form-check">
-                                <input class="form-check-input cursor-pointer" type="checkbox" id="signin_remember_me" />
-                                <label class="form-check-label" for="signin_remember_me">Remember me</label>
-                            </div>
-                        </div>
-                        <button type="submit" form="signin_form" class="btn btn-success w-100"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;Sign In</button>
-                    </form>
-                    <div class="text-center my-3">
-                        <i class="fa-solid fa-shield-halved text-success"></i>
-                        <small class="text-muted"><i class="bi bi-shield-check"></i>&nbsp;Secured with 256-bit SSL encryption</small>
+                    <div class="d-flex align-items-center my-3">
+                        <hr class="flex-grow-1 border-2 border-dark" />
+                        <span class="px-2 text-muted">OR</span>
+                        <hr class="flex-grow-1 border-2 border-dark" />
+                    </div>
+                    <div class="d-grid gap-2 mb-2">
+                        <button type="button" class="btn btn-outline-danger w-100" id="social_google_btn"><i class="fab fa-google"></i>&nbsp;<span id="google_btn_text">Sign in with Google</span></button>
+                        <button type="button" class="btn btn-outline-primary w-100" id="social_facebook_btn"><i class="fab fa-facebook-f"></i>&nbsp;<span id="facebook_btn_text">Sign in with Facebook</span></button>
                     </div>
                 </div>
             </div>
@@ -52,5 +95,7 @@
 </div>
 
 <th:block th:replace="~{fragments/toast-fragment :: toast_alert_message}"></th:block>
+<th:block th:replace="~{fragments/modal-fragment :: terms_conditions_modal}"></th:block>
+<th:block th:replace="~{fragments/modal-fragment :: reset_password_modal}"></th:block>
 </body>
 </html>

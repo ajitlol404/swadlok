@@ -49,4 +49,6 @@ public interface UserRepository extends JpaRepository<User, UUID> {
                 .orElseThrow(() -> new NoSuchElementException("User with [CODE: " + code + "] not found"));
     }
 
+    boolean existsByPhoneNumber(String phoneNumber);
+
 }
