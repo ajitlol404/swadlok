@@ -1,5 +1,6 @@
 package com.swadlok.service.impl;
 
+import com.swadlok.dto.ProfileDto;
 import com.swadlok.dto.UserDto.AdminRequest;
 import com.swadlok.dto.UserDto.AdminResponse;
 import com.swadlok.entity.Customer;
@@ -94,5 +95,29 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         customerRepository.save(customer);
+    }
+
+    @Override
+    public ProfileDto.Response getProfile(String email) {
+        User user = userRepository.findUserByEmail(email);
+        return ProfileDto.Response.fromEntity(user);
+    }
+
+    @Override
+    public ProfileDto.Response updateSuperAdminProfile(String email, ProfileDto.Request request) {
+        User user = userRepository.findUserByEmail(email);
+
+        // Update name only if present & not blank
+        if (request.name() != null && !request.name().isBlank()) {
+            user.setName(request.name().trim().toLowerCase());
+        }
+
+        // Update password only if present & not blank
+        if (request.password() != null && !request.password().isBlank()) {
+            user.setPassword(passwordEncoder.encode(request.password()));
+        }
+
+        userRepository.save(user);
+        return ProfileDto.Response.fromEntity(user);
     }
 }

@@ -41,4 +41,9 @@ const SmtpAPI = {
     deleteSmtpById: (uuid) => deleteRequest(`${BASE_URLS.SMTP}/${uuid}`),
 };
 
-export { BASE_URLS, FileAPI, SetupAPI, UnverifiedUserAPI, SmtpAPI };
+const ProfileAPI = {
+    getProfile: () => getRequest(BASE_URLS.PROFILE),
+    updateProfile: (body) => patchRequest(BASE_URLS.PROFILE, body),
+};
+
+export { BASE_URLS, FileAPI, SetupAPI, UnverifiedUserAPI, SmtpAPI, ProfileAPI };
